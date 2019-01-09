@@ -1,6 +1,7 @@
-import { injectGlobal } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
+import "rc-slider/assets/index.css";
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   *  {
     margin: 0;
     padding: 0;
@@ -20,3 +21,5 @@ injectGlobal`
     color: #fff;
   }
 `;
+
+export default GlobalStyle;
