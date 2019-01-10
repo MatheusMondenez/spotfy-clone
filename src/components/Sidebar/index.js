@@ -44,7 +44,7 @@ class Sidebar extends Component {
               <a href="">Seu Daily Mix</a>
             </li>
             <li>
-              <a href="">Tocados Recentemente</a>
+              <a href="">Recentes</a>
             </li>
             <li>
               <a href="">Músicas</a>
