@@ -6,8 +6,7 @@ import reducers from "./ducks";
 const middlewares = [];
 const sagaMonitor =
   process.env.NODE_ENV === "development"
-    ? // ? console.tron.createSagaMonitor()
-      null
+    ? console.tron.createSagaMonitor()
     : null;
 const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
 
@@ -15,8 +14,7 @@ middlewares.push(sagaMiddleware);
 
 const createAppropriateStore =
   process.env.NODE_ENV === "development"
-    ? // ? console.tron.createStore
-      createStore
+    ? console.tron.createStore
     : createStore;
 const store = createAppropriateStore(
   reducers,
