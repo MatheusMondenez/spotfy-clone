@@ -4,7 +4,15 @@ export const Types = {
 };
 
 const INITIAL_STATE = {
-  data: {},
+  data: {
+    "id": 0,
+    "title": "Papercut",
+    "author": "Linkin Park",
+    "album": "Hybrid Theory",
+    "file": "https://s3-sa-east-1.amazonaws.com/gonative/1.mp3",
+    "thumbnail": "https://s3-sa-east-1.amazonaws.com/gonative/linkin_park.jpg",
+    "playlistId": 1
+  },
   loading: false
 };
 
