@@ -3,6 +3,8 @@ import Slider from "rc-slider";
 import Sound from "react-sound";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as PlayerActions } from "../../store/ducks/player";
 import {
   Container,
   Current,
@@ -20,13 +22,13 @@ import PauseIcon from "../../assets/images/pause.svg";
 import ForwardIcon from "../../assets/images/forward.svg";
 import RepeatIcon from "../../assets/images/repeat.svg";
 
-const Player = ({ player }) => (
+const Player = ({ player, play, pause }) => (
   <Container>
     {!!player.currentSong && (
       <Sound url={player.currentSong.file} playStatus={player.status} />
     )}
     <Current>
-      { !!player.currentSong && (
+      {!!player.currentSong && (
         <Fragment>
           <img
             src={player.currentSong.thumbnail}
@@ -37,8 +39,7 @@ const Player = ({ player }) => (
             <small>{player.currentSong.author}</small>
           </div>
         </Fragment>
-      ) }
-      
+      )}
     </Current>
     <Progress>
       <Controls>
@@ -48,9 +49,15 @@ const Player = ({ player }) => (
         <button>
           <img src={BackwardIcon} alt="Backward" />
         </button>
-        <button>
-          <img src={PlayIcon} alt="Play" />
-        </button>
+        {!!player.currentSong && player.status === Sound.status.PLAYING ? (
+          <button onClick={pause}>
+            <img src={PauseIcon} alt="Pause" />
+          </button>
+        ) : (
+          <button onClick={play}>
+            <img src={PlayIcon} alt="Play" />
+          </button>
+        )}
         <button>
           <img src={ForwardIcon} alt="Forward" />
         </button>
@@ -91,11 +98,19 @@ Player.propTypes = {
       file: PropTypes.string
     }),
     status: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  play: PropTypes.func.isRequired,
+  pause: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   player: state.player
 });
 
-export default connect(mapStateToProps)(Player);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(PlayerActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Player);
