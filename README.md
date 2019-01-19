@@ -1,1 +1,1 @@
-A Spotify clone made with React, Redux and Redux Saga.
+A Spotify clone made with **React**, **Redux** and **Redux Saga**.
